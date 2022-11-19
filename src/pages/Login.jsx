@@ -1,7 +1,7 @@
 function Login() {
   return (
     <main>
-      <p>Login</p>
+      <p className="text-lime">Login</p>
     </main>
   )
 }
