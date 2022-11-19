@@ -1,4 +1,5 @@
 import React from "react";
+import { LordIcon } from "./LordIcon";
 
 function Navbar({ user="Admin" }) {
   return (
@@ -8,7 +9,7 @@ function Navbar({ user="Admin" }) {
         <ul className="nav-container">
           <a href="/">
             <li className="nav-button">
-              <lord-icon
+              <LordIcon
                 className="h-8 w-8"
                 src="/lord-icon/home-icon.json"
                 trigger="hover"
@@ -22,7 +23,7 @@ function Navbar({ user="Admin" }) {
         <p className="status">{user}</p>
       </div>
       <div className="nav-button logout-button">
-          <lord-icon
+          <LordIcon
             className="w-8 h-8"
             src="/lord-icon/logout-icon.json"
             trigger="hover"

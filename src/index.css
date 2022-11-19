@@ -80,6 +80,19 @@ body {
   min-height: 100vh;
 }
 
+/* LAYOUT */
+.defaultPaddingX {
+  @apply px-6 md:px-16 xl:px-[10%];
+}
+
+.defaultPaddingY {
+  @apply py-12;
+}
+
+main {
+  @apply defaultPaddingX defaultPaddingY;
+}
+
 /* BUTTONS */
 .btn {
   color: white;
@@ -101,6 +114,26 @@ body {
 
 .btn:focus {
   background-color: #30bd61;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+}
+
+th {
+  border-bottom: solid 1px gray;
+}
+
+td {
+  border-bottom: 1px solid rgb(73, 72, 75);
+}
+
+th, td {
+  padding: 1rem 0.5rem;
 }
 
 /* NAVBAR */

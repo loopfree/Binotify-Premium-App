@@ -6,12 +6,6 @@ import ListSongs from "./pages/ListSongs";
 import ListSubs from "./pages/ListSubs";
 import NotFound from "./pages/NotFound";
 
-import lottie from 'lottie-web';
-import { defineElement } from 'lord-icon-element';
-
-// define "lord-icon" custom element with default properties
-defineElement(lottie.loadAnimation);
-
 function App() {
   const [user, setUser] = useState<null | string>(localStorage.getItem("user") || null);
   useEffect(() => {
