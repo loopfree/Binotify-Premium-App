@@ -5,9 +5,36 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Binotify Premium</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #loading-container {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(180deg, #242526, #191414);
+        background-repeat: no-repeat;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: "Gotham Regular", sans-serif;
+      }
+      #title {
+        font-size: 5vw;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="loading-container">
+        <h1 style="font-size:5vw; margin:2rem 0;">Catify</h1>
+        <p style="font-size:1.8vw; margin:0; opacity:50%;">Loading...</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
