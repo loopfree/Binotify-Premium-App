@@ -1,7 +1,7 @@
 function Register() {
   return (
     <main>
-      <p className="text-lime">Login</p>
+      <p className="text-lime">Register</p>
     </main>
   )
 }

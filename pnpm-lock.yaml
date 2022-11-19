@@ -5,6 +5,8 @@ specifiers:
   '@types/react-dom': ^18.0.8
   '@vitejs/plugin-react': ^2.2.0
   autoprefixer: ^10.4.13
+  lord-icon-element: ^4.0.0
+  lottie-web: ^5.9.6
   postcss: ^8.4.19
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -14,6 +16,8 @@ specifiers:
   vite: ^3.2.3
 
 dependencies:
+  lord-icon-element: 4.0.0
+  lottie-web: 5.9.6
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -946,6 +950,15 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /lord-icon-element/4.0.0:
+    resolution: {integrity: sha512-5VFHwnTtcD2u29POw7e57eifWCK0v1ZkQFyIJ/yyMOBiAiZL4z5PQSnEvbp0lPr9X4E1zC1pk53xuQLfIV+qTA==}
+    engines: {node: '>=16.0.0'}
+    dev: false
+
+  /lottie-web/5.9.6:
+    resolution: {integrity: sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==}
+    dev: false
 
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
