@@ -1,10 +1,13 @@
 import Navbar from "../components/Navbar";
+import UserTag from "../components/UserTag";
 
 function ListSubs() {
+  const user = "A";
   return (
-    <main className="flex">
-      <Navbar />
-      <p className="title">List Subscriptions</p>
+    <main>
+      {/* USER TAG */}
+      <UserTag user={user} />
+      <h1 className="title">List Subscriptions</h1>
     </main>
   )
 }
