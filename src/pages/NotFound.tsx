@@ -1,4 +1,6 @@
-function NotFound() {
+import React from "react";
+
+const NotFound:React.FC = () => {
   return (
     <main className="min-h-screen w-full flex items-center justify-center gap-[12vw]">
       <aside className="relative h-full">

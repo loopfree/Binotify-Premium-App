@@ -1,3 +1,5 @@
+import React from "react";
+
 function Navbar({ user="Admin" }) {
   return (
     <nav className="flex flex-col justify-between h-screen w-1/6 bg-black p-8">

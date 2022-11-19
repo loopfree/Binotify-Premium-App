@@ -1,4 +1,6 @@
-function Login({ setUser }) {
+import React from "react";
+
+const Login:React.FC = () => {
   return (
     <main>
       <p className="text-lime">Login</p>
