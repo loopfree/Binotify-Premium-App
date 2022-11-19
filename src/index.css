@@ -28,6 +28,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  scrollbar-color: #1DB954 transparent;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #1DB954;
+  border-radius: 4px;
 }
 
 /* TYPEFACE */
@@ -49,4 +66,45 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+/* BUTTONS */
+.btn {
+  color: white;
+  background-color: #1DB954;
+  padding: .75rem 1.5rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-size: .9rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition-duration: 100ms;
+}
+
+.btn:hover {
+  background-color: #1ED760;
+}
+
+.btn:focus {
+  background-color: #30bd61;
+}
+
+/* UNDERLINE ANIMATION */
+.un {
+  display: inline-block;
+  padding-bottom:2px;
+  background-image: linear-gradient(#1DB954, #1DB954);
+  background-position: 0 100%; /*OR bottom left*/
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  transition:
+    background-size 0.2s,
+    background-position 0s 0.2s; /*change after the size immediately*/
+}
+
+.un:hover {
+  background-position: 100% 100%; /*OR bottom right*/
+  background-size: 100% 1px;
 }

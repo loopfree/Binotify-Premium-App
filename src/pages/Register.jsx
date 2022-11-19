@@ -1,4 +1,4 @@
-function Login() {
+function Register() {
   return (
     <main>
       <p className="text-lime">Login</p>
@@ -6,4 +6,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default Register;
