@@ -7,10 +7,14 @@ function ListSongs() {
   const user = "Artist1";
 
   return (
-    <main>
+    <main className="relative">
       {/* USER TAG */}
       <UserTag user={user} />
       <Brand />
+      {/* ADD SONG */}
+      <button className="fixed right-0 bottom-0 bg-green rounded-full p-2">
+        <p>+</p>
+      </button>
       
       <h1 className="title">Premium Songs List</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
