@@ -4,11 +4,11 @@ import Brand from "../components/Brand";
 
 function ListSubs() {
   const user = "Admin1";
-  const [data, setData] = useState<null | any>([]);
+  const [data, setData] = useState<any[]>([]);
 
   async function getSubscriptionList() {
     const response = await fetch("http://localhost:3000/subscriptionlist");
-    return response.body;
+    return await response.json();
   }
 
   useEffect(() => {
