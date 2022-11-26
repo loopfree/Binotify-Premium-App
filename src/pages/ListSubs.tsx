@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 
 function ListSubs() {
   const user = "Admin1";
-  const data = [
-    {
-      subscriber_id: 1,
-      status: "PENDING",
-    }, {
-      subscriber_id: 2,
-      status: "PENDING",
-    },
-  ];
+  const [data, setData] = useState<null | any>([]);
+
+  async function getSubscriptionList() {
+    const response = await fetch("http://localhost:3000/subscriptionlist");
+    return response.body;
+  }
+
+  useEffect(() => {
+    getSubscriptionList().then((results) => {
+      setData(results);
+    });
+    console.log(data);
+  }, []);
 
   return (
     <main>
