@@ -13,9 +13,9 @@ function ListSubs() {
 
   useEffect(() => {
     getSubscriptionList().then((results) => {
-      setData(results);
+      setData(results.return);
     });
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return (
@@ -34,9 +34,11 @@ function ListSubs() {
           </tr>
         </thead>
         <tbody>
+        </tbody>
+        <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.subscriber_id}</td>
+              <td>{item.subscriberId}</td>
               <td>{item.status}</td>
               <td>
                 <button className="btnDanger text-sm mr-3">Reject</button>
