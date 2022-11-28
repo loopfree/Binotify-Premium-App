@@ -7,7 +7,7 @@ function Register() {
     <main>
       <ImagesCarousel />
 
-      <div className="container">
+      <div className="container relative z-50">
         <header className="main-header">
           <div className="brand-logo">
             <img className="logo" src="/assets/img/logo.png" />
@@ -16,7 +16,7 @@ function Register() {
           <nav className="main-nav">
             <ul>
               <li><a href="https://gitlab.informatika.org/if3110-2022-k02-01-33/tugas-besar-1">About Project</a></li>
-              <li><a href="/page/login/">Sign In</a></li>
+              <li><a href="/login">Sign In</a></li>
             </ul>
           </nav>
         </header>

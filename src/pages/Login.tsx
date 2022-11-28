@@ -42,11 +42,6 @@ const Login:React.FC = () => {
                         <div className="input-group">
                             <button type="submit" className="btn" id="button-submit">Log In</button>
                         </div>
-                        <div className="guest">
-                            <a href="/page/home/">
-                                Login as guest
-                            </a>
-                        </div>
                 </div>
             </section>
         </div>
