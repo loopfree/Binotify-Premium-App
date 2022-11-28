@@ -7,16 +7,54 @@ function ListSubs() {
   const [data, setData] = useState<any[]>([]);
 
   async function getSubscriptionList() {
-    const response = await fetch("http://localhost:3000/subscriptionlist");
+    const response = await fetch("http://localhost:3000/subscription/list");
     return await response.json();
   }
 
   useEffect(() => {
     getSubscriptionList().then((results) => {
-      setData(results.return);
+      if(results !== null)  {
+        setData(results.return);
+      } else {
+        setData([]);
+      }
     });
     // console.log(data);
   }, []);
+
+  async function onApproveButton(subscriberId: string, creatorId: string) {
+    const arg: any = {
+      'subscriberId': subscriberId,
+      'creatorId': creatorId
+    }
+
+    await fetch("http://localhost:3000/subscription/approve", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(arg)
+    })
+
+    window.location.reload();
+  }
+
+  async function onRejectButton(subscriberId: string, creatorId: string) {
+    const arg: any = {
+      'subscriberId': subscriberId,
+      'creatorId': creatorId
+    }
+
+    await fetch("http://localhost:3000/subscription/decline", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(arg)
+    })
+
+    window.location.reload();
+  }
 
   return (
     <main>
@@ -29,6 +67,7 @@ function ListSubs() {
         <thead>
           <tr>
             <th>Subscriber ID</th>
+            <th>Creator ID</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -39,10 +78,11 @@ function ListSubs() {
           {data.map((item, index) => (
             <tr key={index}>
               <td>{item.subscriberId}</td>
+              <td>{item.creatorId}</td>
               <td>{item.status}</td>
               <td>
-                <button className="btnDanger text-sm mr-3">Reject</button>
-                <button className="btnPrimary text-sm">Approve</button>
+                <button className="btnDanger text-sm mr-3" onClick={() => onRejectButton(item.subscriberId, item.creatorId)}>Reject</button>
+                <button className="btnPrimary text-sm" onClick={() => onApproveButton(item.subscriberId, item.creatorId)}>Approve</button>
               </td>
             </tr>
           ))}
