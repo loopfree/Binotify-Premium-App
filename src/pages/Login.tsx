@@ -3,6 +3,33 @@ import ImagesCarousel from "../components/ImagesCarousel";
 import "../styles/auth.css"
 
 const Login:React.FC = () => {
+
+  async function onLoginButton() {
+    const username: string = document.getElementById("username-input")?.textContent as string;
+    const password: string = document.getElementById("password-input")?.textContent as string;
+
+    const arg: any = {
+      username: username,
+      password: password
+    }
+
+    const response: any = await fetch("http://localhost:3000/authenticate/login",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.parse(arg)
+    });
+
+    const userType = response.json().return;
+
+    if(userType === "penyanyi") {
+      localStorage.setItem("user", "penyanyi");
+    } else if(userType === "admin") {
+      localStorage.setItem("user", "admin");
+    }
+  }
+
   return (
     <main>
       {/* <p className="text-lime">Login</p>
@@ -44,7 +71,7 @@ const Login:React.FC = () => {
                 type="submit" 
                 className="btnPrimary !rounded-md !text-lg !py-2 font-head" 
                 id="button-submit"
-                onClick={() => {localStorage.setItem("user", "admin"); window.location.href = '/'}}
+                onClick={onLoginButton}
               >
                 Log In
               </button>
