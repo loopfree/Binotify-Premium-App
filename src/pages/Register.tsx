@@ -3,6 +3,28 @@ import ImagesCarousel from "../components/ImagesCarousel";
 import "../styles/auth.css";
 
 function Register() {
+  async function onRegisterButton() {
+    const name: string = document.getElementById("name-input")?.textContent as string;
+    const username: string = document.getElementById("username-input")?.textContent as string;
+    const email: string = document.getElementById("email-input")?.textContent as string;
+    const password: string = document.getElementById("password-input")?.textContent as string;
+
+    const arg: {} = {
+      email: email,
+      name: name,
+      username: username,
+      password: password
+    }
+
+    await fetch("http://localhost:3000/authenticate/register", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(arg)
+    });
+  }
+
   return (
     <main>
       <ImagesCarousel />
@@ -28,6 +50,10 @@ function Register() {
           </h1>
           <div className="join-form">
             <div className="input-group">
+              <label>Name</label>
+              <input type="text" id="name-input" />
+            </div>
+            <div className="input-group">
               <label>Username</label>
               <input type="text" id="username-input" />
             </div>
@@ -44,7 +70,11 @@ function Register() {
               <input type="password" id="password-confirmation-input" />
             </div>
             <div className="input-group">
-              <button type="submit" className="btnPrimary !rounded-md !text-lg !py-2 font-head" id="submit-button">Join now</button>
+              <button type="submit" 
+                className="btnPrimary !rounded-md !text-lg !py-2 font-head" 
+                id="submit-button"
+                onClick={onRegisterButton}
+                >Join now</button>
             </div>
             <p className="text-right text-sm">Already have an account? <a href="/login" className="text-green un">Log In</a></p>
           </div>
