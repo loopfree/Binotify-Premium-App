@@ -44,9 +44,9 @@ function Register() {
               <input type="password" id="password-confirmation-input" />
             </div>
             <div className="input-group">
-              <button type="submit" className="btn" id="submit-button">Join Now</button>
+              <button type="submit" className="btnPrimary !rounded-md !text-lg !py-2 font-head" id="submit-button">Join now</button>
             </div>
-            <a href="/login">Log In</a>
+            <p className="text-right text-sm">Already have an account? <a href="/login" className="text-green un">Log In</a></p>
           </div>
         </section>
       </div>

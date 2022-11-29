@@ -40,9 +40,16 @@ const Login:React.FC = () => {
               <input type="password" id="password-input" />
             </div>
             <div className="input-group">
-              <button type="submit" className="btn" id="button-submit">Log In</button>
+              <button 
+                type="submit" 
+                className="btnPrimary !rounded-md !text-lg !py-2 font-head" 
+                id="button-submit"
+                onClick={() => {localStorage.setItem("user", "admin"); window.location.href = '/'}}
+              >
+                Log In
+              </button>
             </div>
-            <a href="/register">Register</a>
+            <p className="text-right text-sm">Don't have an account? <a href="/register" className="text-green un">Register</a></p>
           </div>
         </section>
       </div>
