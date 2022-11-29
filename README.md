@@ -1,0 +1,1 @@
+Cara jalanin: `pnpm install` terus `pnpm run dev`
