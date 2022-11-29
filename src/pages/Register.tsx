@@ -8,7 +8,7 @@ function Register() {
       <ImagesCarousel />
 
       <div className="container relative z-50">
-        <header className="main-header">
+        {/* <header className="main-header">
           <div className="brand-logo">
             <img className="logo" src="/assets/img/logo.png" />
             <div className="brand-logo-name">\(OwO)/</div>
@@ -19,7 +19,7 @@ function Register() {
               <li><a href="/login">Sign In</a></li>
             </ul>
           </nav>
-        </header>
+        </header> */}
         <section className="join-main-section">
           <h1 className="join-text">
             Join us as
@@ -46,6 +46,7 @@ function Register() {
             <div className="input-group">
               <button type="submit" className="btn" id="submit-button">Join Now</button>
             </div>
+            <a href="/login">Log In</a>
           </div>
         </section>
       </div>
