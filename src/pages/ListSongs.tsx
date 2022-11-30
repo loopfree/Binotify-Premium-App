@@ -1,4 +1,4 @@
-import React, {FormEventHandler, useState} from "react";
+import React, {FormEventHandler, useState, useEffect} from "react";
 import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 import SongCard from "../components/SongCard";
@@ -6,7 +6,26 @@ import Modal from "../components/Modal";
 
 function ListSongs() {
   const user = "Artist1";
-  const onEdit:FormEventHandler<HTMLFormElement> = async(e) => {
+
+  const [data, setData] = useState<any[]>([]);
+
+  async function getSongsList() {
+    const response = await fetch("http://catify-rest:3000/songs/premium");
+    return await response.json();
+  }
+
+  useEffect(() => {
+    getSongsList().then((results) => {
+      if(results !== null)  {
+        setData(results.return);
+        console.log(results.return);
+      } else {
+        setData([]);
+      }
+    });
+  }, []);
+
+  const onSubmit:FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault();
     alert('submitted');
   }
@@ -15,7 +34,7 @@ function ListSongs() {
 
   return (
     <main className="relative">
-      <Modal type='Add song' title='' onEdit={onEdit} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal type='Add song' title='' onEdit={onSubmit} isOpen={isOpen} setIsOpen={setIsOpen} />
       {/* USER TAG */}
       <UserTag user={user} />
       <Brand />
@@ -34,7 +53,7 @@ function ListSongs() {
           genre="Hip-Hop"
           year="2019"
           onDelete={() => {}}
-          onEdit={onEdit}
+          onEdit={onSubmit}
         />
       </div>
     </main>

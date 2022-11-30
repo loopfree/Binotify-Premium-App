@@ -91,7 +91,7 @@ function ListSubs() {
       <Brand />
 
       <h1 className="title">Subscriptions Application List</h1>
-      <table>
+      <table className="text-sm md:text-base">
         <thead>
           <tr>
             <th>Subscriber ID</th>
