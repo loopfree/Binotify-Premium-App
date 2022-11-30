@@ -11,7 +11,7 @@ function ListSubs() {
                                   .find((row) => row.startsWith("token="))
                                   ?.split("=")[1];
 
-    const response = await fetch("http://catify-rest:3000/subscription/list", {
+    const response = await fetch("http://localhost:3000/subscription/list", {
       method: 'GET',
       headers: {
         authorization: token === undefined ? "" : token as string

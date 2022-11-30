@@ -18,7 +18,7 @@ const Login:React.FC = () => {
       password: password
     }
 
-    const response: any = await fetch("http://localhost:3000/authenticate/login",{
+    const response = await fetch("http://localhost:3000/authenticate/login",{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ const Login:React.FC = () => {
       body: JSON.stringify(arg)
     });
 
-    const resp = response.json();
+    const resp = await response.json();
     const userType = resp.return;
 
     if(userType === "penyanyi") {
