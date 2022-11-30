@@ -7,7 +7,16 @@ function ListSubs() {
   const [data, setData] = useState<any[]>([]);
 
   async function getSubscriptionList() {
-    const response = await fetch("http://catify-rest:3000/subscription/list");
+    const token: string | undefined = document.cookie.split('; ')
+                                  .find((row) => row.startsWith("token="))
+                                  ?.split("=")[1];
+
+    const response = await fetch("http://catify-rest:3000/subscription/list", {
+      method: 'GET',
+      headers: {
+        authorization: token === undefined ? "" : token as string
+      }
+    });
     return await response.json();
   }
 
@@ -22,6 +31,10 @@ function ListSubs() {
   }, []);
 
   async function onApproveButton(subscriberId: string, creatorId: string) {
+    const token: string | undefined = document.cookie.split('; ')
+                                  .find((row) => row.startsWith("token="))
+                                  ?.split("=")[1];
+                                  
     const arg: any = {
       'subscriberId': subscriberId,
       'creatorId': creatorId
@@ -30,7 +43,8 @@ function ListSubs() {
     await fetch("http://catify-rest:3000/subscription/approve", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: token === undefined ? "" : token as string
       },
       body: JSON.stringify(arg)
     })
