@@ -7,7 +7,7 @@ type Prop = {
 
 const UserTag:React.FC<Prop> = ({ user }) => {
   return (
-    <div className="group fixed top-16 right-24 xl:right-[10%] flex flex-col items-end cursor-pointer">
+    <div className="group fixed top-16 right-16 xl:right-[10%] flex flex-col items-end cursor-pointer">
       <p className="px-3 py-1 bg-white/25 backdrop-blur border border-white z-50 rounded-full text-sm">
         {user}
       </p>
