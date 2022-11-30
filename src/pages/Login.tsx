@@ -25,16 +25,18 @@ const Login:React.FC = () => {
 
     if(userType === "penyanyi") {
       localStorage.setItem("user", "penyanyi");
+      window.location.href = '/'
     } else if(userType === "admin") {
       localStorage.setItem("user", "admin");
+      window.location.href = '/'
     }
   }
 
   return (
     <main>
-      {/* <p className="text-lime">Login</p>
+      <p className="text-lime">Login</p>
       <button onClick={() => {localStorage.setItem("user", "admin"); window.location.href = '/'}} className="relative z-50">Login admin</button>
-      <button onClick={() => {localStorage.setItem("user", "artist"); window.location.href = '/'}} className="relative z-50">Login artist</button> */}
+      <button onClick={() => {localStorage.setItem("user", "artist"); window.location.href = '/'}} className="relative z-50">Login artist</button>
 
       <ImagesCarousel />
         
