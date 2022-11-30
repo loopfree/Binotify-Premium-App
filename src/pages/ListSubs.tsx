@@ -19,7 +19,6 @@ function ListSubs() {
         setData([]);
       }
     });
-    // console.log(data);
   }, []);
 
   async function onApproveButton(subscriberId: string, creatorId: string) {
@@ -56,6 +55,21 @@ function ListSubs() {
     window.location.reload();
   }
 
+  const [currPage, setCurrPage] = useState(1);
+  const [lastPage, setLastPage] = useState(Math.max(1, Math.ceil(data.length / 10)));
+
+  useEffect(() => {
+    setLastPage(Math.max(1, Math.ceil(data.length / 10)));
+  }, [data]);
+
+  const nextPage = () => {
+    setCurrPage(Math.min(lastPage, currPage + 1));
+  };
+
+  const prevPage = () => {
+    setCurrPage(Math.max(1, currPage - 1));
+  };
+
   return (
     <main>
       {/* USER TAG */}
@@ -75,7 +89,7 @@ function ListSubs() {
         <tbody>
         </tbody>
         <tbody>
-          {data.map((item, index) => (
+          {data.slice(10 * (currPage - 1), 10 * currPage).map((item, index) => (
             <tr key={index}>
               <td>{item.subscriberId}</td>
               <td>{item.creatorId}</td>
@@ -88,6 +102,11 @@ function ListSubs() {
           ))}
         </tbody>
       </table>
+      <div className="sticky bottom-24 flex justify-end w-full gap-6 mt-6">
+        <button className="btnPrimary text-sm disabled:opacity-50" onClick={prevPage} disabled={currPage===1}>&lt;</button>
+        <p className="w-4 text-center">{currPage}</p>
+        <button className="btnPrimary text-sm disabled:opacity-50" onClick={nextPage} disabled={currPage===lastPage}>&gt;</button>
+      </div>
     </main>
   )
 }
