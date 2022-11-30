@@ -1,12 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ImagesCarousel from "../components/ImagesCarousel";
 import "../styles/auth.css"
 
 const Login:React.FC = () => {
 
+  const navigate = useNavigate();
+
   async function onLoginButton() {
-    const username: string = document.getElementById("username-input")?.textContent as string;
-    const password: string = document.getElementById("password-input")?.textContent as string;
+    const usernameInput: HTMLInputElement = document.getElementById("username-input") as HTMLInputElement;
+    const passwordInput: HTMLInputElement = document.getElementById("password-input") as HTMLInputElement;
+    const username: string = usernameInput.value;
+    const password: string = passwordInput.value;
 
     const arg: any = {
       username: username,
@@ -18,18 +23,23 @@ const Login:React.FC = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.parse(arg)
+      body: JSON.stringify(arg)
     });
 
-    const userType = response.json().return;
+    const resp = response.json();
+    const userType = resp.return;
 
     if(userType === "penyanyi") {
       localStorage.setItem("user", "penyanyi");
-      window.location.href = '/'
+      navigate("/");
     } else if(userType === "admin") {
       localStorage.setItem("user", "admin");
-      window.location.href = '/'
+      navigate("/");
+    } else {
+      alert("BUAT ACCOUNT");
     }
+
+    document.cookie = `token=${resp.token}`;
   }
 
   return (
