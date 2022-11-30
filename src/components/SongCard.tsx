@@ -20,7 +20,7 @@ const UserTag:React.FC<Prop> = ({ img, title, artist, year, genre, onDelete, onE
 
   return (
     <>
-      <Modal title={title} onEdit={onEdit} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal type='Edit song' title={title} onEdit={onEdit} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className='group song-card'>
         <img 
           src={img}
