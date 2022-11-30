@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 import { useState } from "react";
 import "../styles/song-card.css";
 import { LordIcon } from "./LordIcon";
@@ -7,7 +7,7 @@ type Prop = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   title: string;
-  onEdit: () => void;
+  onEdit: FormEventHandler<HTMLFormElement>;
 };
 
 const Modal:React.FC<Prop> = ({ isOpen, setIsOpen, title, onEdit }) => {
@@ -23,24 +23,25 @@ const Modal:React.FC<Prop> = ({ isOpen, setIsOpen, title, onEdit }) => {
           />
         </button>
         <h1 className="mb-8">Edit song</h1>
-        <div className="input-group">
-          <label>Title</label>
-          <input type="text" id="title-input" maxLength={64} defaultValue={title} />
-        </div>
-        <div className="input-group">
-          <label>Audio File</label>
-          <input type="file" id="audio-input" accept=".mp3,.m4a" />
-        </div>
-        <div className="input-group">
-          <button 
-            type="submit" 
-            className="btnPrimary !rounded-md !text-lg !py-2 font-head" 
-            id="button-submit"
-            onClick={onEdit}
-          >
-            Save
-          </button>
-        </div>
+        <form onSubmit={onEdit}>
+          <div className="input-group">
+            <label>Title</label>
+            <input type="text" id="title-input" maxLength={64} defaultValue={title} />
+          </div>
+          <div className="input-group">
+            <label>Audio File</label>
+            <input type="file" id="audio-input" accept=".mp3,.m4a" />
+          </div>
+          <div className="input-group">
+            <button 
+              type="submit" 
+              className="btnPrimary !rounded-md !text-lg !py-2 font-head" 
+              id="button-submit"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

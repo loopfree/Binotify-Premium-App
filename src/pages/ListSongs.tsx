@@ -1,10 +1,14 @@
-import React from "react";
+import React, {FormEventHandler} from "react";
 import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 import SongCard from "../components/SongCard";
 
 function ListSongs() {
   const user = "Artist1";
+  const onEdit:FormEventHandler<HTMLFormElement> = async(e) => {
+    e.preventDefault();
+    alert('submitted');
+  }
 
   return (
     <main className="relative">
@@ -26,7 +30,7 @@ function ListSongs() {
           genre="Hip-Hop"
           year="2019"
           onDelete={() => {}}
-          onEdit={() => {}}
+          onEdit={onEdit}
         />
       </div>
     </main>

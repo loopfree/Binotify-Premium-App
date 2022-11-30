@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 import { useState } from "react";
 import "../styles/song-card.css";
 import { LordIcon } from "./LordIcon";
@@ -12,7 +12,7 @@ type Prop = {
   genre: string;
   year: string;
   onDelete: () => void;
-  onEdit: () => void;
+  onEdit: FormEventHandler<HTMLFormElement>;
 };
 
 const UserTag:React.FC<Prop> = ({ img, title, artist, year, genre, onDelete, onEdit }) => {
