@@ -3,14 +3,15 @@ import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 
 function ListSubs() {
-  const user = "Admin1";
+  const user: string = localStorage.getItem("username") as string;
+
   const [data, setData] = useState<any[]>([]);
 
-  async function getSubscriptionList() {
-    const token: string | undefined = document.cookie.split('; ')
+  const token: string | undefined = document.cookie.split('; ')
                                   .find((row) => row.startsWith("token="))
                                   ?.split("=")[1];
 
+  async function getSubscriptionList() {
     const response = await fetch("http://localhost:3000/subscription/list", {
       method: 'GET',
       headers: {
@@ -31,10 +32,6 @@ function ListSubs() {
   }, []);
 
   async function onApproveButton(subscriberId: string, creatorId: string) {
-    const token: string | undefined = document.cookie.split('; ')
-                                  .find((row) => row.startsWith("token="))
-                                  ?.split("=")[1];
-                                  
     const arg: any = {
       'subscriberId': subscriberId,
       'creatorId': creatorId
@@ -61,7 +58,8 @@ function ListSubs() {
     await fetch("http://localhost:3000/subscription/decline", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: token === undefined ? "" : token as string
       },
       body: JSON.stringify(arg)
     })
