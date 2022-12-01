@@ -5,7 +5,7 @@ import SongCard from "../components/SongCard";
 import Modal from "../components/Modal";
 
 function ListSongs() {
-  const user = "Artist1";
+  const user = localStorage.getItem("username") as string;
 
   const [data, setData] = useState<any[]>([]);
 
