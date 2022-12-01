@@ -1,13 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ImagesCarousel from "../components/ImagesCarousel";
 import "../styles/auth.css";
 
 function Register() {
+  const navigate = useNavigate();
   async function onRegisterButton() {
-    const name: string = document.getElementById("name-input")?.textContent as string;
-    const username: string = document.getElementById("username-input")?.textContent as string;
-    const email: string = document.getElementById("email-input")?.textContent as string;
-    const password: string = document.getElementById("password-input")?.textContent as string;
+    
+    const nameInput = document.getElementById("name-input") as HTMLInputElement;
+    const usernameInput = document.getElementById("username-input") as HTMLInputElement;
+    const emailInput = document.getElementById("email-input") as HTMLInputElement;
+    const passwordInput = document.getElementById("password-input") as HTMLInputElement;
+
+    const name: string = nameInput.value;
+    const username: string = usernameInput.value; 
+    const email: string = emailInput.value; 
+    const password: string = passwordInput.value; 
 
     const arg: {} = {
       email: email,
@@ -16,13 +24,19 @@ function Register() {
       password: password
     }
 
-    await fetch("http://localhost:3000/authenticate/register", {
+    const resp = await fetch("http://localhost:3000/authenticate/register", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(arg)
     });
+
+    const respJson = await resp.json();
+
+    if(respJson.return == "succeed") {
+      navigate("/");
+    }
   }
 
   return (
