@@ -30,10 +30,12 @@ const Login:React.FC = () => {
     const userType = resp.return;
 
     if(userType === "penyanyi") {
-      localStorage.setItem("user", "penyanyi");
+      localStorage.setItem("user", "artist");
+      localStorage.setItem("username", username);
       navigate("/");
     } else if(userType === "admin") {
       localStorage.setItem("user", "admin");
+      localStorage.setItem("username", username);
       navigate("/");
     } else {
       alert("BUAT ACCOUNT");
