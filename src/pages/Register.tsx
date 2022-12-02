@@ -36,6 +36,8 @@ function Register() {
 
     if(respJson.return == "succeed") {
       navigate("/login");
+    } else if (respJson.return == "existed"){
+      alert("Email or username used up");
     }
   }
 
