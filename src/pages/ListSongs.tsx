@@ -4,20 +4,19 @@ import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 import SongCard from "../components/SongCard";
 import Modal from "../components/Modal";
+var token: string | undefined = document.cookie.split('; ')
+                                               .find((row) => row.startsWith("token="))
+                                               ?.split("=")[1];
 
 function ListSongs() {
-  const token: string | undefined = document.cookie.split('; ')
-                                                    .find((row) => row.startsWith("token="))
-                                                    ?.split("=")[1];
-
   const user = localStorage.getItem("username") as string;
 
   const [data, setData] = useState<any[]>([]);
 
   async function getSongsList() {
     const arg = {
-      creatorId: localStorage.getItem('userId');
-    }
+      creatorId: localStorage.getItem('userId')
+    };
 
     const response = await fetch("http://catify-rest:3000/premium_singer/song/list", {
       method: 'GET',
@@ -77,7 +76,10 @@ function ListSongs() {
             title: titleInput.value, 
             audioPath: resJson['path'],
             creatorId: localStorage.getItem('userId')
-          })
+          }),
+          headers: {
+            'Authorization': token === undefined ? "" : token as string
+          }
         });
         
         if (response.status == 201) {
