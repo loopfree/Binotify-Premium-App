@@ -11,11 +11,13 @@ function ListSubs() {
                                   .find((row) => row.startsWith("token="))
                                   ?.split("=")[1];
 
+  console.log(token);                        
+
   async function getSubscriptionList() {
     const response = await fetch("http://localhost:3000/subscription/list", {
       method: 'GET',
       headers: {
-        authorization: token === undefined ? "" : token as string
+        'Authorization': token === undefined ? "" : token as string
       }
     });
     return await response.json();

@@ -6,12 +6,26 @@ import SongCard from "../components/SongCard";
 import Modal from "../components/Modal";
 
 function ListSongs() {
+  const token: string | undefined = document.cookie.split('; ')
+                                                    .find((row) => row.startsWith("token="))
+                                                    ?.split("=")[1];
+
   const user = localStorage.getItem("username") as string;
 
   const [data, setData] = useState<any[]>([]);
 
   async function getSongsList() {
-    const response = await fetch("http://localhost:3000/premium_singer/song/list");
+    const arg = {
+      creatorId: localStorage.getItem('userId');
+    }
+
+    const response = await fetch("http://catify-rest:3000/premium_singer/song/list", {
+      method: 'GET',
+      headers: {
+        'Authorization': token === undefined ? "" : token as string
+      },
+      body: JSON.stringify(arg)
+    });
     return await response.json();
   }
 
