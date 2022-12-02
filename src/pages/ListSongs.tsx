@@ -80,6 +80,7 @@ function ListSongs() {
         
         if (response.status == 201) {
           alert('Successfully submitted new song');
+          window.location.reload();
         }
         else {
           alert('Failed to add song');
@@ -109,7 +110,6 @@ function ListSongs() {
             key={song.id}
             img="https://picsum.photos/200/300"
             title={song.title}
-            artist={song.artist}
             onDelete={() => {}}
             onEdit={onSubmit}
           />
