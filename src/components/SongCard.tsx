@@ -8,14 +8,11 @@ type Prop = {
   img: string;
   title: string;
   artist: string;
-  album: string;
-  genre: string;
-  year: string;
   onDelete: () => void;
   onEdit: FormEventHandler<HTMLFormElement>;
 };
 
-const UserTag:React.FC<Prop> = ({ img, title, artist, year, genre, onDelete, onEdit }) => {
+const UserTag:React.FC<Prop> = ({ img, title, artist, onDelete, onEdit }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,7 +26,7 @@ const UserTag:React.FC<Prop> = ({ img, title, artist, year, genre, onDelete, onE
         />
         <div className='song-info'>
           <h2 className='song-title'>{title}</h2>
-          <p className='song-desc'>{artist} • {year} • {genre}</p>
+          <p className='song-desc'>{artist}</p>
         </div>
         <div className='flex gap-3 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 duration-300 justify-end items-center absolute bottom-4 right-4'>
           <button className='bg-red-500 rounded-full p-2 w-10 h-10 hover:bg-red-800 duration-300' onClick={onDelete}>

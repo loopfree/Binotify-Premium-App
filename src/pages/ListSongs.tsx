@@ -104,16 +104,16 @@ function ListSongs() {
       
       <h1 className="title">Premium Songs List</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
-        <SongCard 
-          img="https://picsum.photos/200/300"
-          title="The Box"
-          artist="Roddy Ricch"
-          album="Please Excuse Me For Being Antisocial"
-          genre="Hip-Hop"
-          year="2019"
-          onDelete={() => {}}
-          onEdit={onSubmit}
-        />
+        {data.map((song) => (
+          <SongCard 
+            key={song.id}
+            img="https://picsum.photos/200/300"
+            title={song.title}
+            artist={song.artist}
+            onDelete={() => {}}
+            onEdit={onSubmit}
+          />
+        ))}
       </div>
     </main>
   )
