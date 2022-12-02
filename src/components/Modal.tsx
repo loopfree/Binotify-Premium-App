@@ -8,10 +8,11 @@ type Prop = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   title: string;
+  songId: number;
   onEdit: FormEventHandler<HTMLFormElement>;
 };
 
-const Modal:React.FC<Prop> = ({ type, isOpen, setIsOpen, title, onEdit }) => {
+const Modal:React.FC<Prop> = ({ type, isOpen, setIsOpen, title, songId=0, onEdit }) => {
   return (
     <div className={`${isOpen? 'block' : 'hidden'} fixed top-0 left-0 h-screen w-full bg-black/50 backdrop-blur flex items-center justify-center z-50`}>
       <div className="relative h-fit w-[50vw] bg-gray border-white/50 rounded-lg p-16">
@@ -33,6 +34,7 @@ const Modal:React.FC<Prop> = ({ type, isOpen, setIsOpen, title, onEdit }) => {
             <label>Audio File</label>
             <input type="file" id="audio-input" accept=".mp3,.m4a" />
           </div>
+          <input type="hidden" id="id-input" value={songId} />
           <div className="input-group">
             <button 
               type="submit" 

@@ -93,6 +93,7 @@ function ListSongs() {
     const formFields = form.elements;
     const titleInput = formFields[0] as HTMLInputElement;
     const audioInput = formFields[1] as HTMLInputElement;
+    const songId = formFields[2] as HTMLInputElement;
 
     const fd = new FormData();
     var path: string | null = null;
@@ -122,9 +123,9 @@ function ListSongs() {
     const response = await fetch("http://localhost:3000/premium_singer/song/update", {
       method: 'POST',
       body: JSON.stringify({
+        songId: songId.value,
         title: titleInput.value, 
         audioPath: path,
-        // songId: song_id    // TAMBAHIN SONG ID DI ATAS
       }),
       headers: {
         'Authorization': token === undefined ? "" : token as string
@@ -141,13 +142,13 @@ function ListSongs() {
     
   }
 
-  const onDelete = async() => {   // Tolong cek tipenya
+  const onDelete = async(song_id) => {   // Tolong cek tipenya
     // BUTUH SONG ID song_id
 
     const response = await fetch("http://localhost:3000/premium_singer/song/delete", {
       method: 'POST',
       body: JSON.stringify({
-        // songId: song_id
+        songId: song_id
       }),
       headers: {
         'Authorization': token === undefined ? "" : token as string
@@ -178,13 +179,14 @@ function ListSongs() {
       </button>
       
       <h1 className="title">Premium Songs List</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
-        {data.map((song) => (
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {data.map((song, index) => (
           <SongCard 
-            key={song.song_id}
+            key={index}
             img="https://picsum.photos/200/300"
             title={song.judul}
-            onDelete={onDelete}
+            songId={song.id}
+            onDelete={() => onDelete(song.id)}
             onEdit={onEdit}
           />
         ))}

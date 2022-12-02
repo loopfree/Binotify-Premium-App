@@ -7,16 +7,17 @@ import Modal from "./Modal";
 type Prop = {
   img: string;
   title: string;
+  songId: number;
   onDelete: () => void;
   onEdit: FormEventHandler<HTMLFormElement>;
 };
 
-const UserTag:React.FC<Prop> = ({ img, title, onDelete, onEdit }) => {
+const UserTag:React.FC<Prop> = ({ img, title, songId, onDelete, onEdit }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <Modal type='Edit song' title={title} onEdit={onEdit} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal type='Edit song' title={title} songId={songId} onEdit={onEdit} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className='group song-card'>
         <img 
           src={img}
