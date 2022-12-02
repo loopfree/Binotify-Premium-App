@@ -15,7 +15,7 @@ function ListSongs() {
   async function getSongsList() {
     const creatorId= localStorage.getItem('userId')
 
-    const response = await fetch(`http://localhost:3000/premium_singer/song/list?creatorId=${creatorId}`, {
+    const response = await fetch(`http://localhost:3000/premium_singer/${creatorId}/song/list`, {
       method: 'GET',
       headers: {
         'Authorization': token === undefined ? "" : token as string
@@ -108,9 +108,6 @@ function ListSongs() {
           img="https://picsum.photos/200/300"
           title="The Box"
           artist="Roddy Ricch"
-          album="Please Excuse Me For Being Antisocial"
-          genre="Hip-Hop"
-          year="2019"
           onDelete={() => {}}
           onEdit={onSubmit}
         />
