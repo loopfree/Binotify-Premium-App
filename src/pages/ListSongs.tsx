@@ -15,7 +15,7 @@ function ListSongs() {
   async function getSongsList() {
     const creatorId= localStorage.getItem('userId')
 
-    const response = await fetch(`http://localhost:3000/premium_singer/${creatorId}/song/list`, {
+    const response = await fetch(`http://localhost:3000/premium_singer/song/list?creatorId=${creatorId}`, {
       method: 'GET',
       headers: {
         'Authorization': token === undefined ? "" : token as string
@@ -105,7 +105,6 @@ function ListSongs() {
       
       <h1 className="title">Premium Songs List</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
-<<<<<<< HEAD
         {data.map((song) => (
           <SongCard 
             key={song.id}
@@ -115,15 +114,6 @@ function ListSongs() {
             onEdit={onSubmit}
           />
         ))}
-=======
-        <SongCard 
-          img="https://picsum.photos/200/300"
-          title="The Box"
-          artist="Roddy Ricch"
-          onDelete={() => {}}
-          onEdit={onSubmit}
-        />
->>>>>>> 73cb58ff5414320fc8f1274fe6a0dabe1c93e9c9
       </div>
     </main>
   )
