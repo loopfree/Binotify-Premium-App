@@ -15,7 +15,7 @@ function ListSongs() {
   async function getSongsList() {
     const creatorId= localStorage.getItem('userId')
 
-    const response = await fetch(`http://localhost:3000/premium_singer/song/list?creatorId=${creatorId}`, {
+    const response = await fetch(`http://localhost:3000/premium_singer/${creatorId}/song/list`, {
       method: 'GET',
       headers: {
         'Authorization': token === undefined ? "" : token as string
@@ -50,10 +50,6 @@ function ListSongs() {
       const fd = new FormData();
       fd.append("title", titleInput.value);
       fd.append("audio", (audioInput.files as FileList)[0]);
-
-      for (var key of fd.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-      }
       
       const resRaw = await fetch(`http://localhost:8080/server/endpoint/submit_song.php`, {
         method: 'POST',
@@ -90,6 +86,84 @@ function ListSongs() {
     }
   }
 
+  const onEdit:FormEventHandler<HTMLFormElement> = async(e) => {
+    // BUTUH SONG ID song_id
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formFields = form.elements;
+    const titleInput = formFields[0] as HTMLInputElement;
+    const audioInput = formFields[1] as HTMLInputElement;
+
+    const fd = new FormData();
+    var path: string | null = null;
+    
+    if (!titleInput.value) {
+      alert('Title is empty');
+      return;
+    }
+    if (audioInput.value) {
+      fd.append("title", titleInput.value);
+      fd.append("audio", (audioInput.files as FileList)[0]);
+      const resRaw = await fetch(`http://localhost:8080/server/endpoint/submit_song.php`, {
+        method: 'POST',
+        body: fd
+      });
+      
+      var resJson = await resRaw.json();
+      if (!resJson['path']) {
+        alert('Failed to upload file');
+        return;
+      }
+      else {
+        path = resJson['path'];
+      }
+    }
+
+    const response = await fetch("http://localhost:3000/premium_singer/song/update", {
+      method: 'POST',
+      body: JSON.stringify({
+        title: titleInput.value, 
+        audioPath: path,
+        // songId: song_id    // TAMBAHIN SONG ID DI ATAS
+      }),
+      headers: {
+        'Authorization': token === undefined ? "" : token as string
+      }
+    });
+    
+    if (response.status == 201) {
+      alert('Successfully updated the song');
+      window.location.reload();
+    }
+    else {
+      alert('Failed to update the song');
+    }
+    
+  }
+
+  const onDelete = async() => {   // Tolong cek tipenya
+    // BUTUH SONG ID song_id
+
+    const response = await fetch("http://localhost:3000/premium_singer/song/delete", {
+      method: 'POST',
+      body: JSON.stringify({
+        // songId: song_id
+      }),
+      headers: {
+        'Authorization': token === undefined ? "" : token as string
+      }
+    });
+    
+    if (response.status == 201) {
+      alert('Successfully deleted the song');
+      window.location.reload();
+    }
+    else {
+      alert('Failed to delete the song');
+    }
+    
+  }
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -107,11 +181,11 @@ function ListSongs() {
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {data.map((song) => (
           <SongCard 
-            key={song.id}
+            key={song.song_id}
             img="https://picsum.photos/200/300"
-            title={song.title}
-            onDelete={() => {}}
-            onEdit={onSubmit}
+            title={song.judul}
+            onDelete={onDelete}
+            onEdit={onEdit}
           />
         ))}
       </div>
