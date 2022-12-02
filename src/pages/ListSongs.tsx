@@ -70,7 +70,8 @@ function ListSongs() {
             creatorId: localStorage.getItem('userId')
           }),
           headers: {
-            'Authorization': token === undefined ? "" : token as string
+            'Authorization': token === undefined ? "" : token as string,
+            'Content-Type': 'application/json'
           }
         });
         
