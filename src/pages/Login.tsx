@@ -48,10 +48,6 @@ const Login:React.FC = () => {
 
   return (
     <main>
-      <p className="text-lime">Login</p>
-      <button onClick={() => {localStorage.setItem("user", "admin"); window.location.href = '/'}} className="relative z-50">Login admin</button>
-      <button onClick={() => {localStorage.setItem("user", "artist"); window.location.href = '/'}} className="relative z-50">Login artist</button>
-
       <ImagesCarousel />
         
       <div className="container relative z-10">
