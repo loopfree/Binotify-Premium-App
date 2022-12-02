@@ -1,5 +1,4 @@
 import React, {FormEventHandler, useState, useEffect} from "react";
-import axios from 'axios';
 import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 import SongCard from "../components/SongCard";
@@ -14,16 +13,13 @@ function ListSongs() {
   const [data, setData] = useState<any[]>([]);
 
   async function getSongsList() {
-    const arg = {
-      creatorId: localStorage.getItem('userId')
-    };
+    const creatorId= localStorage.getItem('userId')
 
-    const response = await fetch("http://catify-rest:3000/premium_singer/song/list", {
+    const response = await fetch(`http://localhost:3000/premium_singer/song/list?creatorId=${creatorId}`, {
       method: 'GET',
       headers: {
         'Authorization': token === undefined ? "" : token as string
-      },
-      body: JSON.stringify(arg)
+      }
     });
     return await response.json();
   }
@@ -31,8 +27,8 @@ function ListSongs() {
   useEffect(() => {
     getSongsList().then((results) => {
       if(results !== null)  {
-        setData(results.return);
-        console.log(results.return);
+        setData(results.songs);
+        console.log(results);
       } else {
         setData([]);
       }
@@ -53,7 +49,7 @@ function ListSongs() {
     else {
       const fd = new FormData();
       fd.append("title", titleInput.value);
-      fd.append("audio", audioInput.files[0]);
+      fd.append("audio", (audioInput.files as FileList)[0]);
 
       for (var key of fd.entries()) {
         console.log(key[0] + ', ' + key[1]);
