@@ -1,4 +1,5 @@
 import React, {FormEventHandler, useState, useEffect} from "react";
+import axios from 'axios';
 import UserTag from "../components/UserTag";
 import Brand from "../components/Brand";
 import SongCard from "../components/SongCard";
@@ -10,7 +11,7 @@ function ListSongs() {
   const [data, setData] = useState<any[]>([]);
 
   async function getSongsList() {
-    const response = await fetch("http://catify-rest:3000/songs/premium");
+    const response = await fetch("http://localhost:3000/premium_singer/song/list");
     return await response.json();
   }
 
@@ -27,7 +28,53 @@ function ListSongs() {
 
   const onSubmit:FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault();
-    alert('submitted');
+    const form = e.target as HTMLFormElement;
+    const formFields = form.elements;
+    const titleInput = formFields[0] as HTMLInputElement;
+    const audioInput = formFields[1] as HTMLInputElement;
+
+    if (!titleInput.value || !audioInput.value) {
+      alert('Please complete the song data');
+    }
+
+    else {
+      const fd = new FormData();
+      fd.append("title", titleInput.value);
+      fd.append("audio", audioInput.files[0]);
+
+      for (var key of fd.entries()) {
+        console.log(key[0] + ', ' + key[1]);
+      }
+      
+      const resRaw = await fetch(`http://localhost:8080/server/endpoint/submit_song.php`, {
+        method: 'POST',
+        body: fd
+      });
+
+      var resJson = await resRaw.json();
+
+      if (!resJson['path']) {
+        alert('Failed to upload file');
+      }
+      else {
+        const response = await fetch("http://localhost:3000/premium_singer/song/create", {
+          method: 'POST',
+          body: JSON.stringify({
+            title: titleInput.value, 
+            audioPath: resJson['path'],
+            creatorId: localStorage.getItem('userId')
+          })
+        });
+        
+        if (response.status == 201) {
+          alert('Successfully submitted new song');
+        }
+        else {
+          alert('Failed to add song');
+        }
+        
+      }
+    }
   }
 
   const [isOpen, setIsOpen] = useState(false);

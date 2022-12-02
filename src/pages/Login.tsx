@@ -27,13 +27,15 @@ const Login:React.FC = () => {
     });
 
     const resp = await response.json();
-    const userType = resp.return;
+    const userType = resp.type;
 
     if(userType === "penyanyi") {
+      localStorage.setItem("userId", resp.id);
       localStorage.setItem("user", "artist");
       localStorage.setItem("username", username);
       navigate("/");
     } else if(userType === "admin") {
+      localStorage.setItem("userId", resp.id);
       localStorage.setItem("user", "admin");
       localStorage.setItem("username", username);
       navigate("/");
