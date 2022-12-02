@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ImagesCarousel from "../components/ImagesCarousel";
 import "../styles/auth.css"
 
 const Login:React.FC = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   async function onLoginButton() {
     const usernameInput: HTMLInputElement = document.getElementById("username-input") as HTMLInputElement;
@@ -33,12 +33,12 @@ const Login:React.FC = () => {
       localStorage.setItem("userId", resp.id);
       localStorage.setItem("user", "artist");
       localStorage.setItem("username", username);
-      navigate("/");
+      window.location.href = "/";
     } else if(userType === "admin") {
       localStorage.setItem("userId", resp.id);
       localStorage.setItem("user", "admin");
       localStorage.setItem("username", username);
-      navigate("/");
+      window.location.href = "/";
     } else {
       alert("BUAT ACCOUNT");
     }
