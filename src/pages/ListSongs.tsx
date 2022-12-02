@@ -15,7 +15,7 @@ function ListSongs() {
   async function getSongsList() {
     const creatorId= localStorage.getItem('userId')
 
-    const response = await fetch(`http://localhost:3000/premium_singer/song/list?creatorId=${creatorId}`, {
+    const response = await fetch(`http://localhost:3000/premium_singer/${creatorId}/song/list`, {
       method: 'GET',
       headers: {
         'Authorization': token === undefined ? "" : token as string
