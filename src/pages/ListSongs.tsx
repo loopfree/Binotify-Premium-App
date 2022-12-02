@@ -95,6 +95,8 @@ function ListSongs() {
     const audioInput = formFields[1] as HTMLInputElement;
     const songId = formFields[2] as HTMLInputElement;
 
+    console.log("Song id: " + songId);
+
     const fd = new FormData();
     var path: string | null = null;
     
@@ -144,6 +146,7 @@ function ListSongs() {
 
   const onDelete = async(song_id) => {   // Tolong cek tipenya
     // BUTUH SONG ID song_id
+    console.log("Song id: " + song_id);
 
     const response = await fetch("http://localhost:3000/premium_singer/song/delete", {
       method: 'POST',
