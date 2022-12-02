@@ -39,7 +39,7 @@ function ListSubs() {
       'creatorId': creatorId
     }
 
-    await fetch("http://catify-rest:3000/subscription/approve", {
+    await fetch("http://localhost:3000/subscription/approve", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function ListSubs() {
       'creatorId': creatorId
     }
 
-    await fetch("http://catify-rest:3000/subscription/decline", {
+    await fetch("http://localhost:3000/subscription/decline", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
