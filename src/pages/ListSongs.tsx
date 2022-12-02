@@ -88,15 +88,12 @@ function ListSongs() {
   }
 
   const onEdit:FormEventHandler<HTMLFormElement> = async(e) => {
-    // BUTUH SONG ID song_id
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formFields = form.elements;
     const titleInput = formFields[0] as HTMLInputElement;
     const audioInput = formFields[1] as HTMLInputElement;
     const songId = formFields[2] as HTMLInputElement;
-
-    console.log("Song id: " + songId);
 
     const fd = new FormData();
     var path: string | null = null;
@@ -131,7 +128,8 @@ function ListSongs() {
         audioPath: path,
       }),
       headers: {
-        'Authorization': token === undefined ? "" : token as string
+        'Authorization': token === undefined ? "" : token as string,
+        'Content-Type': 'application/json'
       }
     });
     
@@ -145,17 +143,15 @@ function ListSongs() {
     
   }
 
-  const onDelete = async(song_id) => {   // Tolong cek tipenya
-    // BUTUH SONG ID song_id
-    console.log("Song id: " + song_id);
-
+  const onDelete = async(song_id) => {
     const response = await fetch("http://localhost:3000/premium_singer/song/delete", {
       method: 'POST',
       body: JSON.stringify({
         songId: song_id
       }),
       headers: {
-        'Authorization': token === undefined ? "" : token as string
+        'Authorization': token === undefined ? "" : token as string,
+        'Content-Type': 'application/json'
       }
     });
     
