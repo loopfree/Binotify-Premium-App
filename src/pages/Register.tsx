@@ -35,7 +35,7 @@ function Register() {
     const respJson = await resp.json();
 
     if(respJson.return == "succeed") {
-      navigate("/");
+      navigate("/login");
     }
   }
 
